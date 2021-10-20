@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>{{title}}</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="static/css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="static/css/style.css">
+      <link rel="stylesheet" href="static/css/citybike.css">
+      <link rel="stylesheet" href="static/css/mountainbike.css">
+      <link rel="stylesheet" href="static/css/scss.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="static/css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="static/images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="static/css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="static/css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">  
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+	<!-- header section start -->
+	<div class="header_section header_main">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="logo"><a href="#"><img src="static/images/logo-img1.jpg" alt="" width="125px"></a></div>
+				</div>
+				<div class="col-sm-9">
+					<nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                           <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                           <a class="nav-item nav-link" href="{{ url_for('register') }}">Registration</a>
+                           <div class=" nav-item nav-link dropdown transparentbar">
+							   <button class="nav-item nav-link dropdown transparentbar dropdown-toggle" type="button" style= id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								   Cycles
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-image: linear-gradient( 89.8deg, rgba(222,74,74,1) 4.7%, rgba(30,29,29,1) 120.3% );">
+										<a class="dropdown-item" href="{{ url_for('mountainbike') }}"style="background-image: linear-gradient(89.8deg, rgba(222,74,74,1) 4.7%, rgba(30,29,29,1) 120.3% );">Mountain Bike</a>
+										<a class="dropdown-item" href="{{ url_for('roadbike') }}"style="background-image: linear-gradient(89.8deg, rgba(222,74,74,1) 4.7%, rgba(30,29,29,1) 120.3% );">Road Bikes</a>
+										<a class="dropdown-item" href="{{ url_for('citybike') }}"style="background-image: linear-gradient(89.8deg, rgba(222,74,74,1) 4.7%, rgba(30,29,29,1) 120.3% );">City Cycle</a>
+										<a class="dropdown-item" href="{{ url_for('bmx') }}"style="background-image: linear-gradient(89.8deg, rgba(222,74,74,1) 4.7%, rgba(30,29,29,1) 120.3% );">BMX</a>
+									</div>
+							</div>
+							<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                    </nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- new collection section start -->
+  <div class="collection_text">{{title}}</div>
+    <main>
+    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+            {% if id==None %}
+            {%for i in cycle%}
+            <div class="col">
+                <a href="{{ url_for('productdetail',id=i.id) }}">
+                    <div class="card h-100 shadow-sm"> <img src="{{ url_for('static',filename='img/' + i.img) }}" class="card-img-top" alt="...">
+                        <div class="label-top shadow-sm">{{i.ccat}}</div>
+                        <div class="card-body">
+                            <div class="clearfix mb-3"style="float: right;"> <span class="float-start badge rounded-pill bg-success">{{ i.cname }}</span> <span class="float-end"><a class="text-muted small" href="#">Rs.{{i.cprice}}</a></span> </div>
+                            <h5 class="card-title">{{ i.cdes }}</h5>
+                            <div class="d-grid gap-2 my-4"> <a href="{{ url_for('addtocart',id=i.id) }}" class="btn btn-warning">Add To Cart</a> </div>
+                            
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="collection_text">Product Details</div>
+            <div class="container my-5">
+               <div class="row">
+                  <div class="col-sm-6 text-center align-self-center">
+                    <img src="{{ url_for('static',filename='img/' + id.img) }}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="col-sm-5 offset-sm-1">
+                     <h2>{{id.cname}}</h2>
+                     <hr>
+                     <p>{{id.cdes}}</p> <br>
+                     <h4>Rs. discounted_price <small class="fw-light text-decoration-line-through">selling_price</small></h4> <br>
+         
+                     <form action="/add-to-cart" class="d-inline">
+                        <input type="hidden" name="product-title" value=700 id=45>
+                        <button type="Submit" class="btn btn-primary shadow px-5 py-2 ms-4">Add to Cart ></button>   
+                     </form>
+               
+                     
+                     <h5 class="mt-5">Available Offers</h5>
+                     <ul>
+                        <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
+                        <li>Special Price Get extra ₹3000 off (price inclusive of discount)</li>
+                        <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
+                        <li>Partner Offer ₹2000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit Card</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+        {% endif %}
+    </div>
+</main>
+    </div>
+    <div class="copyright">2021@TeamTauras</div>
+      <!-- Javascript files-->
+      <script src="static/js/jquery.min.js"></script>
+      <script src="static/js/popper.min.js"></script>
+      <script src="static/js/bootstrap.bundle.min.js"></script>
+      <script src="static/js/jquery-3.0.0.min.js"></script>
+      <script src="static/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="static/js/custom.js"></script>
+      <!-- javascript --> 
+      <script src="static/js/owl.carousel.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+   </body>
+</html>

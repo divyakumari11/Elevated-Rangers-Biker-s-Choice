@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+    
+    <!-- FORM HERE -->
+        <form action="" method="POST" enctype="multipart/form-data">
+
+            {{ form_html.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">ADMINISTRATION</legend>
+
+                <div class="form-group">
+                    {{ form_html.cname.label(class="form-control-label") }}
+
+                    {% if form_html.cname.errors %}
+                        {{ form_html.cname(class="form-control form-control-lg is is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_html.cname.errors %}
+                                <span>
+                                    {{ error }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_html.cname(class="form-control form-control-lg") }}
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group mb-4">
+                    {{ form_html.ccat.label(class='form-control-label') }}
+                    {% if form_html.ccat.errors %}
+                        {{ form_html.ccat(class='form-control form-control-lg is is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form_html.ccat.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_html.ccat(class="form-control form-control") }}
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    {{ form_html.cdes.label(class="form-control-label") }}
+
+                    {% if form_html.cdes.errors %}
+                    {{ form_html.cdes(class="form-control form-control-lg is is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form_html.cdes.errors %}
+                            <span>
+                                {{ error }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_html.cdes(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form_html.cprice.label(class="form-control-label") }}
+
+                    {% if form_html.cprice.errors %}
+                    {{ form_html.cprice(class="form-control form-control-lg is is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form_html.cprice.errors %}
+                            <span>
+                                {{ error }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_html.cprice(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+<!-- for image -->
+                <div class="form-group">  
+                    {{ form_html.img.label() }}
+                    {{ form_html.img(class='form-control-file') }}
+                    {% if form_html.img.errors %}
+                        {% for error in form_html.img.errors %}
+                            <span class="text-danger">
+                                {{ error }}
+                            </span>
+                            <br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                {{ form_html.submit(class="btn btn-outline-info")}}
+            </div>
+
+        </form>
+
+    </div>
+{% endblock content %}
